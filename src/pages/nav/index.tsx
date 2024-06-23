@@ -75,12 +75,16 @@ function Index() {
     console.log(res.errCode)
   })
 
-  const center = { lat: 32.497362991555164, long: 110.84169432860472 }
-  const ne = { lat: 32.50916729, long: 110.86286523 }
-  const sw = { lat: 32.48679658, long: 110.82360543 }
+  // const center = { lat: 32.497362991555164, long: 110.84169432860472 }
+  // const ne = { lat: 32.50916729, long: 110.86286523 }
+  // const sw = { lat: 32.48679658, long: 110.82360543 }
+
+  const center = { lat: 32.631533, long: 110.788021 }
+  const ne = { lat: 32.642654, long: 110.796282 }
+  const sw = { lat: 32.621354, long: 110.778333 }
 
   const opacity = 1
-  const col = 8
+  const col = 6
   const row = 8
   const latPer = (ne.lat - sw.lat) / row
   const longPer = (ne.long - sw.long) / col
@@ -203,7 +207,7 @@ function Index() {
 
         const index = col * i + j
 
-        const src = Env.imageUrl + 'map/' + index + '.png'
+        const src = Env.imageUrl + 'deb/' + index + '.png'
         const o = {
           id: index,
           src,
@@ -330,8 +334,8 @@ function Index() {
         className={mapClass}
         latitude={center.lat}
         longitude={center.long}
-        showLocation={true}
-        markers={markers}
+        // showLocation={true}
+        // markers={markers}
         onMarkerTap={onMarkerTap}
         scale={15} // 3-20
         max-scale={17}
