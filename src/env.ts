@@ -8,12 +8,12 @@ switch (envVer) {
   case 'develop':
     // baseUrl = 'https://127.0.0.1:8000/'
     // baseUrl = 'http://localhost:8000/'
-    // baseUrl = 'https://192.168.122.1:8000/'
+    baseUrl = 'https://192.168.122.1:8000/'
     // baseUrl = 'https://donggou.dev.itove.com/'
-    baseUrl = 'https://www.donggou.net.cn/'
+    // baseUrl = 'https://www.donggou.net.cn/'
     break
   case 'trial':
-    baseUrl = 'https://www.donggou.net.cn/'
+    baseUrl = 'https://donggou.dev.itove.com/'
     break
   case 'release':
     baseUrl = 'https://www.donggou.net.cn/';
