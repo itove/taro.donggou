@@ -45,6 +45,14 @@ function Index() {
     }
   }
 
+  const listOrder = (status) => {
+    if (logged) {
+      Taro.navigateTo({ url: '/pages/order/index?status=' + status})
+    } else {
+      Taro.navigateTo({ url: '/pages/me/login'})
+    }
+  }
+
   return (
     <View className="">
       <View className="p-1 align-items-center d-flex">
@@ -100,25 +108,25 @@ function Index() {
           我的订单
         </View>
         <View className="info-2">
-          <View className="item" onClick={() => goto('youzai')}>
+          <View className="item" onClick={() => listOrder('youzai')}>
             <img
               src={Env.iconUrl + 'grid_1.png'}
             />
             <View> 待付款 </View>
           </View>
-          <View className="item" onClick={() => goto('zhuzai')} >
+          <View className="item" onClick={() => listOrder('zhuzai')} >
             <img
               src={Env.iconUrl + 'grid_2.png'}
             />
             <View> 已付款 </View>
           </View>
-          <View className="item" onClick={() => goto('chizai')} >
+          <View className="item" onClick={() => listOrder('chizai')} >
             <img
               src={Env.iconUrl + 'grid_3.png'}
             />
             <View> 已完成 </View>
           </View>
-          <View className="item" onClick={() => goto('gouzai')} >
+          <View className="item" onClick={() => listOrder('gouzai')} >
             <img
               src={Env.iconUrl + 'grid_4.png'}
             />
