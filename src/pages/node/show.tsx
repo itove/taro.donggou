@@ -370,7 +370,7 @@ function Index() {
       </Tabs>
       }
 
-      { node.price > 0 &&
+      { (node.price > 0 && uid !== 0) &&
       <View className="footer fixed">
         <View className="left">
           <View className="d-none" onClick={() => Taro.switchTab({url: '/pages/index/index'})}>
