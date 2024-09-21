@@ -3,7 +3,7 @@ import { View, Image, Button } from '@tarojs/components'
 import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
+import { Tabs, ImagePreview, InputNumber } from '@nutui/nutui-react-taro'
 import { fmtSeconds } from '../../utils/fmtSeconds'
 
 Taro.options.html.transformElement = (el) => {
@@ -18,6 +18,7 @@ function Index() {
   const [node, setNode] = useState({})
   const [rooms, setRooms] = useState([])
   const [uid, setUid] = useState(0)
+  const [quantity, setQuantity] = useState(1)
   const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
@@ -203,6 +204,22 @@ function Index() {
     setShowPreview(true)
   }
 
+  const buy = () => {
+    console.log('buy')
+    Taro.request({
+      url: Env.apiUrl + 'orders',
+      method: 'POST',
+      data: {
+        nid: node.id,
+        uid: uid,
+        quantity: quantity,
+      }
+    })
+    .then(res => {
+      console.log(res)
+    })
+  }
+
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   return (
@@ -353,10 +370,10 @@ function Index() {
       </Tabs>
       }
 
-      { type == 3 &&
+      { node.price > 0 &&
       <View className="footer fixed">
         <View className="left">
-          <View className="" onClick={() => Taro.switchTab({url: '/pages/index/index'})}>
+          <View className="d-none" onClick={() => Taro.switchTab({url: '/pages/index/index'})}>
             <img src={Env.iconUrl + 'house.png'} />
             <View>主页</View>
           </View>
@@ -364,9 +381,13 @@ function Index() {
             <img src={Env.iconUrl + (isFav && 'star.png' || 'star.png')} />
             <View>{ isFav && '已收藏' || '收藏'}</View>
           </View>
+          <View className="">
+            <InputNumber defaultValue={1} allowEmpty />
+          </View>
         </View>
         <View className="right">
-          <Button className="w-100 btn-primary btn-rounded" onClick={() => preview([{src: Env.imageUrl + node.qr}])}>立即购买</Button>
+          <Button className="w-100 btn-primary btn-rounded d-none" onClick={() => preview([{src: Env.imageUrl + node.qr}])}>立即购买</Button>
+          <Button className="w-100 btn-primary btn-rounded" onClick={() => buy()}>预订</Button>
         </View>
       </View>
       }
