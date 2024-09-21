@@ -94,6 +94,38 @@ function Index() {
           </View>
         </View>
       </View>
+
+      <View className="block">
+        <View className="header">
+          我的订单
+        </View>
+        <View className="info-2">
+          <View className="item" onClick={() => goto('youzai')}>
+            <img
+              src={Env.iconUrl + 'grid_1.png'}
+            />
+            <View> 待付款 </View>
+          </View>
+          <View className="item" onClick={() => goto('zhuzai')} >
+            <img
+              src={Env.iconUrl + 'grid_2.png'}
+            />
+            <View> 已付款 </View>
+          </View>
+          <View className="item" onClick={() => goto('chizai')} >
+            <img
+              src={Env.iconUrl + 'grid_3.png'}
+            />
+            <View> 已完成 </View>
+          </View>
+          <View className="item" onClick={() => goto('gouzai')} >
+            <img
+              src={Env.iconUrl + 'grid_4.png'}
+            />
+            <View> 退款 </View>
+          </View>
+        </View>
+      </View>
     </View>
   )
 }
