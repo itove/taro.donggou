@@ -53,7 +53,7 @@ function Index() {
     setDisabled(true)
     Taro.request({
       method: 'POST',
-      data: { oid: oid, uid: uid },
+      data: { oid: oid, reason: 0 },
       url: Env.apiUrl + 'orders/refund'
     }).then((res) =>{
       if (res.statusCode === 200) {
