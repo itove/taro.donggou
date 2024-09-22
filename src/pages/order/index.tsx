@@ -3,18 +3,26 @@ import { View, Image } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
+import { STATUS } from '../../orderStatus'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
 
 function TabPane({order, index}) {
-  console.log(order)
   return (
     <View key={index} className="list-item" onClick={() => showOrder(order.id)}>
-    <View className="img">
-    <Image className="w-100 rounded" src={Env.imageUrl + order.node.image} mode="widthFix" />
+    <View className="left">
+      <View className="img">
+      <Image className="w-100 rounded" src={Env.imageUrl + order.node.image} mode="widthFix" />
+      </View>
+      <View className="text">
+      {order.node.title}
+      <p className="ellipsis-2">{order.node.summary}</p>
+      </View>
     </View>
-    <View className="text">
-    {order.node.title}
-    <p className="ellipsis-2">{order.node.summary}</p>
+    <View className="right">
+      <View className="status">{STATUS[order.status]}</View>
+      <View><span className="small">¥ </span>{order.price / 100}</View>
+      <View><span className="small">x</span>{order.quantity}</View>
+      <View className="total">总价 <span className="small">¥ </span>{order.amount / 100}</View>
     </View>
     </View>
   )
@@ -53,9 +61,6 @@ function Index() {
         const l2 = []
         const l3 = []
         const l4 = []
-        // data.forEach((order) => {
-        //   l0.push(<TabPane order={order} index={index} />)
-        // })
         data.map((order, index) => {
           l0.push(<TabPane order={order} index={index} />)
           if (order.status === 1) {
@@ -71,11 +76,6 @@ function Index() {
             l4.push(<TabPane order={order} index={index} />)
           }
         })
-        console.log(l0)
-        console.log(l1)
-        console.log(l2)
-        console.log(l3)
-        console.log(l4)
         setAll(l0)
         setPending(l1)
         setPaid(l2)
@@ -97,7 +97,6 @@ function Index() {
         onChange={(value) => {
           setTab1value(value)
         }}
-        activeType="button"
         className="tabs"
         >
         <Tabs.TabPane className="tabpane" title="全部"> {all} </Tabs.TabPane>

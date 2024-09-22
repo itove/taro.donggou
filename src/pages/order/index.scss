@@ -1,0 +1,33 @@
+page .order{
+  --nutui-tabs-tab-line-color: #0FB99F;
+  --nutui-tabs-titles-item-color: #000000;
+  --nutui-tabs-titles-item-active-color: #000000;
+  //--nutui-tabs-tab-line-width: 80px;
+  .list-item{
+    padding: 0;
+    .left{
+      display: flex;
+      width: 75%;
+      .img{
+        margin-right: 10px;
+      }
+      .text{
+        font-size: 12px;
+      }
+    }
+    .right{
+      font-size: 12px;
+      text-align: right;
+      .small{
+        font-size: 10px;
+        display: inline;
+      }
+      .status{
+        margin-bottom: 10px;
+      }
+      .total{
+        margin-top: 10px;
+      }
+    }
+  }
+}
