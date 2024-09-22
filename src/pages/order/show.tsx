@@ -39,10 +39,46 @@ function Index() {
     })
   }, [])
 
+  const cancelOrder = () => {
+    console.log('cancel')
+    Taro.request({
+      method: 'PATCH',
+      data: { status: 4 },
+      url: Env.apiUrl + 'orders/' + oid,
+      header: {
+        'content-type': 'application/merge-patch+json'
+      }
+    }).then((res) =>{
+      if (res.statusCode === 200) {
+        Taro.showToast({
+          title: '订单已取消',
+          icon: 'success',
+          duration: 2000,
+          success: () => {
+            setTimeout(
+              () => {
+                Taro.reLaunch({url: '/pages/order/index'})
+              }, 500
+            )
+          }
+        })
+      }
+    })
+  }
+  const buy = () => {
+    console.log('buy')
+  }
+  const refund = () => {
+    console.log('refund')
+  }
+  const showQr = () => {
+    console.log('showQr')
+  }
+
   return (
     <View className="order order-show">
       <View className="">
-        <View className="list-item" onClick={() => showOrder(order.id)}>
+        <View className="list-item">
         <View className="left">
           <View className="img">
           <Image className="w-100 rounded" height="90px" src={Env.imageUrl + order.node.image} mode="widthFix" />
@@ -62,16 +98,35 @@ function Index() {
       </View>
       <View className="date">
         <View>创建时间: {fmtDate(order.createdAt)} </View>
-        { order.status >= 2 &&
+        { order.paidAt &&
         <View>支付时间: {fmtDate(order.paidAt)} </View>
         }
-        { order.status >= 3 &&
+        { order.status === 3 &&
         <View>核销时间: {fmtDate(order.usedAt)} </View>
+        }
+        { order.status === 4 &&
+        <View>取消时间: {fmtDate(order.cancelledAt)} </View>
+        }
+        { order.status === 5 &&
+        <View>退款时间: {fmtDate(order.refundedAt)} </View>
+        }
+        { order.status === 6 &&
+        <View>删除时间: {fmtDate(order.deletedAt)} </View>
         }
       </View>
       <View className="btns">
-        <Button className="btn">取消订单</Button>
-        <Button className="btn btn-danger">退款</Button>
+        { order.status === 1 &&
+          <>
+        <Button className="btn" onClick={cancelOrder}>取消订单</Button>
+        <Button className="btn btn-success" onClick={buy}>付款</Button>
+          </>
+        }
+        { order.status === 2 &&
+          <>
+        <Button className="btn btn-danger" onClick={refund}>退款</Button>
+        <Button className="btn btn-success" onClick={showQr}>核销码</Button>
+          </>
+        }
       </View>
     </View>
   )
