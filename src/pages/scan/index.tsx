@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button } from "@nutui/nutui-react-taro"
 import './index.scss'
+import Taro from '@tarojs/taro'
+import { Env } from '../../env'
 
 function Index() {
+  const instance = Taro.getCurrentInstance()
+  const query = instance.router.params.q
+  const [logged, setLogged] = useState(false)
+  const q = decodeURIComponent(query).replace(Env.wxqrUrl + '?', '')
 
-  useEffect((query) => {
-    let q = decodeURIComponent(query.q)
-    q = q.replace(Env.wxqrUrl + '?', '')
-    console.log(q);
-    let arr = q.split('&')
-    for (let i of arr) {
-      let arri = i.split('=')
-      this.scan[arri[0]] = arri[1]
-    }
+  useEffect(() => {
+    console.log(q)
 
     Taro.getStorage({
       key: Env.storageKey
@@ -30,7 +28,7 @@ function Index() {
         if (u.roles.includes('ROLE_CASHIER')) {
           Taro.redirectTo({url: '/pages/order/check?' + q})
         } else {
-          Taro.switchTab({url: '/pages/index/index'})
+          // Taro.switchTab({url: '/pages/index/index'})
         }
       })
     })

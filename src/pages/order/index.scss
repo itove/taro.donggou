@@ -1,4 +1,17 @@
 page{
+  .order-check{
+    padding: 16px;
+    .msg{
+      margin-bottom: 32px;
+      View{
+        margin: 6px 0;
+      }
+    }
+    .btn{
+      background: #198754;
+      color: #ffffff;
+    }
+  }
   .order-qr{
     text-align: center;
     padding: 32px;

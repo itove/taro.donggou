@@ -11,7 +11,7 @@ function Index() {
   const [uid, setUid] = useState(0)
   const [logged, setLogged] = useState(false)
   const [order, setOrder] = useState({node:{}})
-  const instance = Taro.getCurrentInstance();
+  const instance = Taro.getCurrentInstance()
   const oid = instance.router.params.oid
 
   useEffect(() => {
@@ -42,12 +42,9 @@ function Index() {
   const cancelOrder = () => {
     console.log('cancel')
     Taro.request({
-      method: 'PATCH',
-      data: { status: 4 },
-      url: Env.apiUrl + 'orders/' + oid,
-      header: {
-        'content-type': 'application/merge-patch+json'
-      }
+      method: 'POST',
+      data: { oid: oid },
+      url: Env.apiUrl + 'orders/cancel'
     }).then((res) =>{
       if (res.statusCode === 200) {
         Taro.showToast({
