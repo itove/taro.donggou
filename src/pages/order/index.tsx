@@ -6,6 +6,7 @@ import { Env } from '../../env'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
 
 function TabPane({order, index}) {
+  console.log(order)
   return (
     <View key={index} className="list-item" onClick={() => showOrder(order.id)}>
     <View className="img">
@@ -20,13 +21,17 @@ function TabPane({order, index}) {
 }
 
 function Index() {
-  const [tab1value, setTab1value] = useState<string | number>('0')
   const [all, setAll] = useState([])
   const [pending, setPending] = useState([])
   const [paid, setPaid] = useState([])
+  const [used, setUsed] = useState([])
   const [refund, setRefund] = useState([])
   const [uid, setUid] = useState(0)
   const [logged, setLogged] = useState(false)
+  const instance = Taro.getCurrentInstance();
+  const status = instance.router.params.status ? instance.router.params.status : 0
+  // const [tab1value, setTab1value] = useState<string | number>('0')
+  const [tab1value, setTab1value] = useState(status)
 
   useEffect(() => {
     Taro.getStorage({
@@ -36,13 +41,46 @@ function Index() {
       setLogged(true)
       setUid(res.data.id)
       Taro.request({
-        url: Env.apiUrl + 'api/orders?uid=' + res.data.id
+        url: Env.apiUrl + 'orders?uid=' + res.data.id
       })
       .then(res => {
         const data = res.data
         console.log(res)
 
-        setAll(data.map((order, index) => <TabPane node={order} index={index} />))
+        // setAll(data.map((order, index) => <TabPane order={order} index={index} />))
+        const l0 = []
+        const l1 = []
+        const l2 = []
+        const l3 = []
+        const l4 = []
+        // data.forEach((order) => {
+        //   l0.push(<TabPane order={order} index={index} />)
+        // })
+        data.map((order, index) => {
+          l0.push(<TabPane order={order} index={index} />)
+          if (order.status === 1) {
+            l1.push(<TabPane order={order} index={index} />)
+          }
+          if (order.status === 2) {
+            l2.push(<TabPane order={order} index={index} />)
+          }
+          if (order.status === 3) {
+            l3.push(<TabPane order={order} index={index} />)
+          }
+          if (order.status === 4) {
+            l4.push(<TabPane order={order} index={index} />)
+          }
+        })
+        console.log(l0)
+        console.log(l1)
+        console.log(l2)
+        console.log(l3)
+        console.log(l4)
+        setAll(l0)
+        setPending(l1)
+        setPaid(l2)
+        setUsed(l3)
+        setRefund(l4)
       })
     })
     .catch(err => {
@@ -62,9 +100,10 @@ function Index() {
         activeType="button"
         className="tabs"
         >
-        <Tabs.TabPane className="tabpane" title="全部订单"> {all} </Tabs.TabPane>
+        <Tabs.TabPane className="tabpane" title="全部"> {all} </Tabs.TabPane>
         <Tabs.TabPane className="tabpane" title="待付款"> {pending} </Tabs.TabPane>
         <Tabs.TabPane className="tabpane" title="已付款"> {paid} </Tabs.TabPane>
+        <Tabs.TabPane className="tabpane" title="已完成"> {used} </Tabs.TabPane>
         <Tabs.TabPane className="tabpane" title="退款"> {refund} </Tabs.TabPane>
       </Tabs>
     </View>

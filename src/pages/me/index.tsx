@@ -106,29 +106,35 @@ function Index() {
       <View className="block">
         <View className="header">
           我的订单
+          <View
+            className="more" 
+            onClick={() => Taro.navigateTo({url: '/pages/order/index'})}
+          >
+          全部订单 <img width="16px" height="16px" src={Env.iconUrl + 'arrow-right.png'} />
+          </View>
         </View>
         <View className="info-2">
-          <View className="item" onClick={() => listOrder('youzai')}>
+          <View className="item" onClick={() => listOrder(1)}>
             <img
-              src={Env.iconUrl + 'grid_1.png'}
+              src={Env.iconUrl + 'order-0.svg'}
             />
             <View> 待付款 </View>
           </View>
-          <View className="item" onClick={() => listOrder('zhuzai')} >
+          <View className="item" onClick={() => listOrder(2)} >
             <img
-              src={Env.iconUrl + 'grid_2.png'}
+              src={Env.iconUrl + 'order-1.svg'}
             />
             <View> 已付款 </View>
           </View>
-          <View className="item" onClick={() => listOrder('chizai')} >
+          <View className="item" onClick={() => listOrder(3)} >
             <img
-              src={Env.iconUrl + 'grid_3.png'}
+              src={Env.iconUrl + 'order-2.svg'}
             />
             <View> 已完成 </View>
           </View>
-          <View className="item" onClick={() => listOrder('gouzai')} >
+          <View className="item" onClick={() => listOrder(4)} >
             <img
-              src={Env.iconUrl + 'grid_4.png'}
+              src={Env.iconUrl + 'order-4.svg'}
             />
             <View> 退款 </View>
           </View>
