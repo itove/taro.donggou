@@ -65,7 +65,7 @@ function Index() {
         const l1 = []
         const l2 = []
         const l3 = []
-        const l4 = []
+        const l5 = []
         data.map((order, index) => {
           l0.push(<TabPane order={order} index={index} />)
           if (order.status === 1) {
@@ -77,7 +77,7 @@ function Index() {
           if (order.status === 3) {
             l3.push(<TabPane order={order} index={index} />)
           }
-          if (order.status === 4) {
+          if (order.status === 5) {
             l4.push(<TabPane order={order} index={index} />)
           }
         })
@@ -85,7 +85,7 @@ function Index() {
         setPending(l1)
         setPaid(l2)
         setUsed(l3)
-        setRefund(l4)
+        setRefund(l5)
       })
     })
     .catch(err => {
