@@ -67,6 +67,7 @@ function Index() {
   }
   const refund = () => {
     console.log('refund')
+    Taro.navigateTo({ url: 'refund?oid=' + oid })
   }
 
   const showQr = (oid) => {

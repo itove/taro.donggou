@@ -12,6 +12,7 @@ export default defineAppConfig({
     'pages/order/show',
     'pages/order/qr',
     'pages/order/check',
+    'pages/order/refund',
     'pages/scan/index',
     'pages/feedback/index',
     'pages/me/login',
