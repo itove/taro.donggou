@@ -11,6 +11,7 @@ export default defineAppConfig({
     'pages/order/index',
     'pages/order/show',
     'pages/order/qr',
+    'pages/order/check',
     'pages/scan/index',
     'pages/feedback/index',
     'pages/me/login',

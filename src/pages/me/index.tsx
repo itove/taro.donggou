@@ -7,7 +7,7 @@ import { Env } from '../../env'
 
 function Index() {
   const [logged, setLogged] = useState(false)
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({roles:[]})
   const [uid, setUid] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState('')
 
@@ -51,6 +51,28 @@ function Index() {
     } else {
       Taro.navigateTo({ url: '/pages/me/login'})
     }
+  }
+
+  const scan = () => {
+    Taro.scanCode({
+      onlyFromCamera: true,
+    }).then(res => {
+      console.log(res)
+      let text = res.result
+      if (text.charCodeAt(0) === 0xFEFF) {
+        console.log('fucking 65279')
+        text = text.substr(1)
+      }
+      if (text.indexOf(Env.wxqrUrl) === 0) {
+        console.log('its wxqr code')
+        Taro.redirectTo({url: '/pages/scan/index?q=' + encodeURIComponent(text)})
+      } else {
+        console.log('NOT wxqr code')
+        Taro.switchTab({url: '/pages/me/index'})
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   return (
@@ -140,6 +162,24 @@ function Index() {
           </View>
         </View>
       </View>
+
+      { user.roles.includes('ROLE_CASHIER') &&
+      <View className="block">
+        <View className="header">
+          管理
+        </View>
+        <View className="info-2">
+          <View className="item" onClick={() => scan()}>
+            <img
+              src={Env.iconUrl + 'scan.svg'}
+            />
+            <View> 扫码核销 </View>
+          </View>
+        </View>
+      </View>
+      }
+
+
     </View>
   )
 }
