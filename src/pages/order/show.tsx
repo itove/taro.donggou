@@ -41,24 +41,33 @@ function Index() {
 
   const cancelOrder = () => {
     console.log('cancel')
-    Taro.request({
-      method: 'POST',
-      data: { oid: oid },
-      url: Env.apiUrl + 'orders/cancel'
-    }).then((res) =>{
-      if (res.statusCode === 200) {
-        Taro.showToast({
-          title: '订单已取消',
-          icon: 'success',
-          duration: 2000,
-          success: () => {
-            setTimeout(
-              () => {
-                Taro.reLaunch({url: '/pages/order/index'})
-              }, 500
-            )
-          }
-        })
+    Taro.showModal({
+      title: '提示',
+      content: '确定取消订单？',
+      success: function (res) {
+        if (res.confirm) {
+          Taro.request({
+            method: 'POST',
+            data: { oid: oid },
+            url: Env.apiUrl + 'orders/cancel'
+          }).then((res) =>{
+            if (res.statusCode === 200) {
+              Taro.showToast({
+                title: '订单已取消',
+                icon: 'success',
+                duration: 2000,
+                success: () => {
+                  setTimeout(
+                    () => {
+                      Taro.reLaunch({url: '/pages/order/index'})
+                    }, 500
+                  )
+                }
+              })
+            }
+          })
+        } else if (res.cancel) {
+        }
       }
     })
   }
