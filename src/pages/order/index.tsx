@@ -22,7 +22,7 @@ function TabPane({order, index}) {
       <View className="status">{STATUS[order.status]}</View>
       <View><span className="small">¥ </span>{order.price / 100}</View>
       <View><span className="small">x</span>{order.quantity}</View>
-      <View className="total">总价 <span className="small">¥ </span>{order.amount / 100}</View>
+      <View className="total">合计 <span className="small">¥ </span>{order.amount / 100}</View>
     </View>
     </View>
   )
