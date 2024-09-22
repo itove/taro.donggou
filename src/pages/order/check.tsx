@@ -123,9 +123,9 @@ function Index() {
         <>
         <View className='msg'>
         <View> 产品：{order.node.title}</View>
-        <View> 单价：{order.price / 100} </View>
+        <View> 单价：¥{order.price / 100} </View>
         <View> 数量：{order.quantity} </View>
-        <View> 合计：{order.amount} </View>
+        <View> 合计：¥{order.amount} </View>
         <View> 创建时间：{fmtDate(order.createdAt)} </View>
         <View> 付款时间：{fmtDate(order.paidAt)} </View>
         </View>

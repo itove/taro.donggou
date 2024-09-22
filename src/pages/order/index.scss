@@ -1,5 +1,6 @@
 page{
-  .order-check{
+  .order-check,
+  .order-refund{
     padding: 16px;
     .msg{
       margin-bottom: 32px;
@@ -35,14 +36,6 @@ page{
         margin: 0;
         margin-left: 10px;
       }
-      .btn-success{
-        background: #198754;
-        color: #ffffff;
-      }
-      .btn-danger{
-        background: #dc3545;
-        color: #ffffff;
-      }
     }
   }
   .order{
@@ -50,6 +43,14 @@ page{
     --nutui-tabs-titles-item-color: #000000;
     --nutui-tabs-titles-item-active-color: #000000;
     //--nutui-tabs-tab-line-width: 80px;
+    .btn-success{
+      background: #198754;
+      color: #ffffff;
+    }
+    .btn-danger{
+      background: #dc3545;
+      color: #ffffff;
+    }
     .list-item{
       .left{
         display: flex;

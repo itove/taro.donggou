@@ -86,10 +86,10 @@ function Index() {
         <>
         <View className='msg'>
         <View> 产品：{order.node.title}</View>
-        <View> 单价：{order.price / 100} </View>
+        <View> 单价：¥{order.price / 100} </View>
         <View> 数量：{order.quantity} </View>
-        <View> 合计：{order.amount} </View>
-        <View> 退款金额：{order.amount} </View>
+        <View> 合计：¥{order.amount / 100} </View>
+        <View> 退款金额：¥{order.amount / 100} </View>
         </View>
         <Button className='btn-danger' onClick={refund} disabled={disabled}>确定退款</Button>
         </>
