@@ -9,6 +9,7 @@ export default defineAppConfig({
     'pages/me/name',
     'pages/me/setting',
     'pages/order/index',
+    'pages/order/show',
     'pages/feedback/index',
     'pages/me/login',
     'pages/node/show',

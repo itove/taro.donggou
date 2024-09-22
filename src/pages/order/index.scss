@@ -1,32 +1,56 @@
-page .order{
-  --nutui-tabs-tab-line-color: #0FB99F;
-  --nutui-tabs-titles-item-color: #000000;
-  --nutui-tabs-titles-item-active-color: #000000;
-  //--nutui-tabs-tab-line-width: 80px;
-  .list-item{
-    padding: 0;
-    .left{
+page{
+  .order-show{
+    padding: 16px;
+    .date{
+      margin-top: 16px;
+      font-size: 12px;
+    }
+    .btns{
+      margin-top: 32px;
       display: flex;
-      width: 75%;
-      .img{
-        margin-right: 10px;
-      }
-      .text{
+      justify-content: flex-end;
+      .btn{
+        width: 75px;
         font-size: 12px;
+        margin: 0;
+        margin-left: 10px;
+      }
+      .btn-danger{
+        background: #dc3545;
+        color: #ffffff;
       }
     }
-    .right{
-      font-size: 12px;
-      text-align: right;
-      .small{
-        font-size: 10px;
-        display: inline;
+  }
+  .order{
+    --nutui-tabs-tab-line-color: #0FB99F;
+    --nutui-tabs-titles-item-color: #000000;
+    --nutui-tabs-titles-item-active-color: #000000;
+    //--nutui-tabs-tab-line-width: 80px;
+    .list-item{
+      padding: 0;
+      .left{
+        display: flex;
+        width: 75%;
+        .img{
+          margin-right: 10px;
+        }
+        .text{
+          font-size: 12px;
+        }
       }
-      .status{
-        margin-bottom: 10px;
-      }
-      .total{
-        margin-top: 10px;
+      .right{
+        font-size: 12px;
+        text-align: right;
+        .small{
+          font-size: 10px;
+          display: inline;
+        }
+        .status{
+          margin-bottom: 10px;
+        }
+        .total{
+          margin-top: 10px;
+        }
       }
     }
   }

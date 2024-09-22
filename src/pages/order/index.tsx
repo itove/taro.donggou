@@ -28,6 +28,11 @@ function TabPane({order, index}) {
   )
 }
 
+function showOrder(oid){
+  console.log(oid)
+  Taro.navigateTo({url: 'show?oid=' + oid})
+}
+
 function Index() {
   const [all, setAll] = useState([])
   const [pending, setPending] = useState([])
