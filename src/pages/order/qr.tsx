@@ -14,6 +14,7 @@ function Index() {
   const [order, setOrder] = useState({node:{}})
   const instance = Taro.getCurrentInstance();
   const oid = instance.router.params.oid
+  const text = Env.wxqrUrl + '?oid=' + oid
 
   useEffect(() => {
     Taro.getStorage({
@@ -30,12 +31,11 @@ function Index() {
   }, [])
 
   useEffect(() => {
+    Taro.setScreenBrightness({value: 1})
   }, [])
 
-  const text = Env.wxqrUrl + '?oid=' + oid
   return (
     <View className="order order-qr">
-      <View className="text">请向景区工作人员出示已完成核销</View>
       <QRCode
         // onClick={this.qrclicked}
         text={text}
@@ -44,6 +44,7 @@ function Index() {
         errorCorrectLevel='M'
         typeNumber={2}
       />
+      <View className="text">请向景区工作人员出示已完成核销</View>
     </View>
   )
 }

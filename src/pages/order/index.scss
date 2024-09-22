@@ -1,4 +1,11 @@
 page{
+  .order-qr{
+    text-align: center;
+    padding: 32px;
+    .text{
+      margin-top: 16px;
+    }
+  }
   .order-show{
     padding: 16px;
     .date{
