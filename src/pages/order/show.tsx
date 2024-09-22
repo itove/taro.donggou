@@ -126,7 +126,7 @@ function Index() {
         { order.status === 2 &&
           <>
         <Button className="btn btn-danger" onClick={refund}>退款</Button>
-        <Button className="btn btn-success" onClick={showQr}>核销码</Button>
+        <Button className="btn btn-success" onClick={() => showQr(oid)}>核销码</Button>
           </>
         }
       </View>

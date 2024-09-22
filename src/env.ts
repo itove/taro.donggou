@@ -28,6 +28,7 @@ export const Env = {
   iconUrl: baseUrl + 'icons/',
   filesUrl: baseUrl + 'files/',
   uploadUrl: baseUrl + 'api/media_objects',
+  wxqrUrl: baseUrl + 'wxqr',
   storageKey: 'user',
   ver: '0.1.0'
 }
