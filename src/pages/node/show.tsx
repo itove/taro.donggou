@@ -208,7 +208,7 @@ function Index() {
     console.log('buy')
     if (logged) {
       Taro.request({
-        url: Env.apiUrl + 'orders',
+        url: Env.apiUrl + 'wx/pay/prepay',
         method: 'POST',
         data: {
           nid: node.id,
