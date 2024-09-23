@@ -87,6 +87,7 @@ function Index() {
   return (
     <View className="order order-show">
       <View className="">
+        <View className=""> 订单编号：{order.sn} </View>
         <View className="list-item">
         <View className="left">
           <View className="img">

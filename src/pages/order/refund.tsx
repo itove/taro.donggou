@@ -85,6 +85,7 @@ function Index() {
       { order.status === 2 &&
         <>
         <View className='msg'>
+        <View> 订单编号：{order.sn} </View>
         <View> 产品：{order.node.title}</View>
         <View> 单价：¥{order.price / 100} </View>
         <View> 数量：{order.quantity} </View>
