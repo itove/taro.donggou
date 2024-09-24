@@ -211,6 +211,10 @@ page{
   }
 }
 .footer{
+  --nutui-inputnumber-button-width: 40px;
+	--nutui-inputnumber-input-font-size: 20px;
+  --nut-icon-width: 22px
+  --nut-icon-height: 22px
   padding: 0px 16px;
   display: flex;
   justify-content: space-between;
