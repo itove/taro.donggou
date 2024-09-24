@@ -25,6 +25,7 @@ function Index() {
   const [showPreview, setShowPreview] = useState(false)
   const [previewImages, setPreviewImages] = useState([])
   const [logged, setLogged] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   const instance = Taro.getCurrentInstance();
   const id = instance.router.params.id
@@ -205,6 +206,7 @@ function Index() {
   }
 
   const buy = () => {
+    setDisabled(true)
     console.log('buy')
     if (logged) {
       Taro.request({
@@ -217,7 +219,33 @@ function Index() {
         }
       })
       .then(res => {
-        console.log(res)
+        if (res.statusCode === 200) {
+          const data = res.data.data
+          console.log(data)
+          Taro.requestPayment({
+            ...data,
+            success (res) {
+              console.log('pay success', res)
+              console.log(data.oid)
+              Taro.navigateTo({ url: '/pages/order/complete?oid=' + data.oid})
+            },
+            fail (err) {
+              console.error('pay fail', err)
+            },
+            complete (res) {
+              setDisabled(true)
+              console.error('pay complete', res)
+            }
+          })
+        } else {
+          Taro.showToast({
+            title: '系统错误',
+            icon: 'error',
+            duration: 2000
+          })
+          setDisabled(false)
+          console.log('server error！' + res.errMsg)
+        }
       })
     } else {
       Taro.navigateTo({ url: '/pages/me/login'})
@@ -391,7 +419,7 @@ function Index() {
         </View>
         <View className="right">
           <Button className="w-100 btn-primary btn-rounded d-none" onClick={() => preview([{src: Env.imageUrl + node.qr}])}>立即购买</Button>
-          <Button className="w-100 btn-primary btn-rounded" onClick={() => buy()}>预订</Button>
+          <Button className="w-100 btn-primary btn-rounded" disabled={disabled} onClick={() => buy()}>预订</Button>
         </View>
       </View>
       }
