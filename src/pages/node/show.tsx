@@ -86,7 +86,6 @@ function Index() {
     })
   }, [])
 
-
   const playAudio = () => {
       console.log(audio.src)
       if (audio.paused) {
@@ -254,6 +253,11 @@ function Index() {
 
   const [tab1value, setTab1value] = useState<string | number>('0')
 
+  const setQ = (v) => {
+    console.log(v)
+    setQuantity(v)
+  }
+
   return (
     <View className="show">
       <Image className="w-100 hero" src={Env.imageUrl + node.image} mode="aspectFill" />
@@ -414,7 +418,7 @@ function Index() {
             <View>{ isFav && '已收藏' || '收藏'}</View>
           </View>
           <View className="">
-            <InputNumber defaultValue={1} allowEmpty />
+            <InputNumber defaultValue={1} onChange={(v) => setQ(v) } allowEmpty />
           </View>
         </View>
         <View className="right">
