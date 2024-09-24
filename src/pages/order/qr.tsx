@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Image, Button } from '@tarojs/components'
 import './index.scss'
 import Taro from '@tarojs/taro'
-import { useDidHide } from '@tarojs/taro'
+import { useDidHide, useUnload } from '@tarojs/taro'
 import { Env } from '../../env'
 import { STATUS } from '../../orderStatus'
 import { Grid, NoticeBar, Swiper, Tabs } from '@nutui/nutui-react-taro'
@@ -32,10 +32,17 @@ function Index() {
   }, [])
 
   useEffect(() => {
+    console.log('page qr show')
     Taro.setScreenBrightness({value: 1})
   }, [])
 
-  useDidHide(() => {
+  // useDidHide(() => {
+  //   console.log('page qr hide')
+  //   Taro.setScreenBrightness({value: -1})
+  // })
+
+  useUnload(() => {
+    console.log('page qr unload')
     Taro.setScreenBrightness({value: -1})
   })
 
