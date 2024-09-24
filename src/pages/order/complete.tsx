@@ -84,6 +84,10 @@ function Index() {
     Taro.navigateTo({ url: 'qr?oid=' + oid })
   }
 
+  const showOrder = () => {
+    Taro.navigateTo({url: 'show?oid=' + oid})
+  }
+
   return (
     <View className="order order-show">
       <View className="">
@@ -111,6 +115,9 @@ function Index() {
         { order.paidAt &&
         <View>支付时间: {fmtDate(order.paidAt)} </View>
         }
+      </View>
+      <View className="btns">
+        <Button className="btn btn-success" onClick={showOrder}>订单详情</Button>
       </View>
     </View>
   )

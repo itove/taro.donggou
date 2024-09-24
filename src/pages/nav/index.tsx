@@ -27,7 +27,6 @@ function getDistance(lat1, lng1, lat2, lng2) {
   return Number(s)
 }
 
-
 function Index() {
   const [display, setDisplay] = useState('none')
   const [progress, setProgress] = useState('语音讲解')

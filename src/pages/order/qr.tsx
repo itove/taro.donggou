@@ -34,6 +34,10 @@ function Index() {
     Taro.setScreenBrightness({value: 1})
   }, [])
 
+  useDidHide(() => {
+    Taro.setScreenBrightness({value: -1})
+  })
+
   return (
     <View className="order order-qr">
       <QRCode
