@@ -72,6 +72,40 @@ function Index() {
       }
     })
   }
+
+  const deleteOrder = () => {
+    console.log('delete')
+    Taro.showModal({
+      title: '提示',
+      content: '确定删除订单？',
+      success: function (res) {
+        if (res.confirm) {
+          Taro.request({
+            method: 'POST',
+            data: { oid: oid },
+            url: Env.apiUrl + 'orders/delete'
+          }).then((res) =>{
+            if (res.statusCode === 200) {
+              Taro.showToast({
+                title: '订单已删除',
+                icon: 'success',
+                duration: 2000,
+                success: () => {
+                  setTimeout(
+                    () => {
+                      Taro.reLaunch({url: '/pages/order/index'})
+                    }, 500
+                  )
+                }
+              })
+            }
+          })
+        } else if (res.cancel) {
+        }
+      }
+    })
+  }
+
   const pay = () => {
     console.log('pay')
     setDisabled(true)
@@ -146,7 +180,9 @@ function Index() {
         </View>
       </View>
       <View className="date">
+        { order.createdAt &&
         <View>创建时间: {fmtDate(order.createdAt)} </View>
+        }
         { order.paidAt &&
         <View>支付时间: {fmtDate(order.paidAt)} </View>
         }
@@ -174,6 +210,11 @@ function Index() {
           <>
         <Button className="btn btn-danger" onClick={refund}>退款</Button>
         <Button className="btn btn-success" onClick={() => showQr(oid)}>核销码</Button>
+          </>
+        }
+        { (order.status === 4 || order.status === 5)&&
+          <>
+        <Button className="btn btn-danger" onClick={deleteOrder}>删除订单</Button>
           </>
         }
       </View>
