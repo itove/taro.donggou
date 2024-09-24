@@ -58,6 +58,9 @@ page{
         width: 75%;
         .img{
           margin-right: 10px;
+          Image{
+            height: 85px !important;
+          }
         }
         .text{
           font-size: 12px;

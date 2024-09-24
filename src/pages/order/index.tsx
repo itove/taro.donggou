@@ -11,7 +11,7 @@ function TabPane({order, index}) {
     <View key={index} className="list-item" onClick={() => showOrder(order.id)}>
     <View className="left">
       <View className="img">
-      <Image className="w-100 rounded" src={Env.imageUrl + order.node.image} mode="widthFix" />
+      <Image className="w-100 rounded" src={Env.imageUrl + order.node.image} mode="aspectFill" />
       </View>
       <View className="text">
       {order.node.title}
