@@ -25,7 +25,7 @@ export const Env = {
   baseUrl: baseUrl,
   apiUrl: baseUrl + 'api/',
   imageUrl: baseUrl + 'images/',
-  iconUrl: baseUrl + 'icons/',
+  iconUrl: baseUrl + 'images/icons/',
   filesUrl: baseUrl + 'files/',
   uploadUrl: baseUrl + 'api/media_objects',
   wxqrUrl: baseUrl + 'wxqr',
