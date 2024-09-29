@@ -211,8 +211,6 @@ page{
   }
 }
 .footer{
-  --nutui-inputnumber-button-width: 40px;
-	--nutui-inputnumber-input-font-size: 20px;
   --nut-icon-width: 22px
   --nut-icon-height: 22px
   padding: 0px 16px;
@@ -236,7 +234,7 @@ page{
     }
   }
   .right{
-    width: 73%;
+    width: 70%;
     .btn-rounded{
       border-radius: 20px;
     }
@@ -247,4 +245,18 @@ page{
 }
 .body{
   font-size: 16px;
+}
+.num-input{
+  display: flex;
+  .minus,
+  .plus,
+  .input {
+    width: 30px;
+    height: 30px;
+    // line-height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

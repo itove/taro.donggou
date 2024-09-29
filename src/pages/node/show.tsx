@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image, Button } from '@tarojs/components'
+import { View, Image, Button, Input } from '@tarojs/components'
 import './show.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import { Tabs, ImagePreview, InputNumber } from '@nutui/nutui-react-taro'
+import { Tabs, ImagePreview } from '@nutui/nutui-react-taro'
 import { fmtSeconds } from '../../utils/fmtSeconds'
+// import { NumInput } from '../../components/numInput'
 
 Taro.options.html.transformElement = (el) => {
   if (el.nodeName === 'image') {
@@ -19,6 +20,8 @@ function Index() {
   const [rooms, setRooms] = useState([])
   const [uid, setUid] = useState(0)
   const [quantity, setQuantity] = useState(1)
+  const [id, setId] = useState(1)
+  const [type, setType] = useState(0)
   const [body, setBody] = useState('')
   const [tags, setTags] = useState([])
   const [isFav, setIsFav] = useState(false)
@@ -27,14 +30,36 @@ function Index() {
   const [logged, setLogged] = useState(false)
   const [disabled, setDisabled] = useState(false)
 
-  const instance = Taro.getCurrentInstance();
-  const id = instance.router.params.id
-  // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟 // 5: index list & show normal
-  const type = instance.router.params.type ? instance.router.params.type : 2
+  const instance = Taro.getCurrentInstance()
   const innerAudioContext = Taro.createInnerAudioContext()
   const [audio, setAudio] = useState(innerAudioContext)
   const [playIcon, setPlayIcon] = useState(Env.iconUrl + 'hotline.png')
   const [progress, setProgress] = useState('语音讲解')
+
+  const minus = () => {
+    console.log('minus')
+    setQuantity(quantity - 1)
+  }
+
+  const add = () => {
+    console.log('add')
+    setQuantity(quantity + 1)
+  }
+
+  const onInput = (v) => {
+    console.log(v.detail.value)
+    setQuantity(Number(v.detail.value))
+  }
+
+  const NumInput = ({v}) => {
+    return (
+      <View className="num-input">
+        <Button className="minus" onClick={minus}>-</Button>
+        <Input className="input" onInput={(v) => onInput(v)} value={v} type='number' />
+        <Button className="plus" onClick={add}>+</Button>
+      </View>
+    )
+  }
 
   const onShareAppMessage = (res) => {}
   const onShareTimeline = (res) => {}
@@ -63,6 +88,12 @@ function Index() {
   })
 
   useEffect(() => {
+    const id = instance.router.params.id
+    // 0: you // 1: zhu // 2: chi & normal node // 3: gou // 4: 走进东沟 // 5: index list & show normal
+    const type = instance.router.params.type ? instance.router.params.type : 2
+    setId(id)
+    setType(type)
+
     Taro.request({
       url: Env.apiUrl + 'nodes/' + id
     })
@@ -224,15 +255,17 @@ function Index() {
           Taro.requestPayment({
             ...data,
             success (res) {
+              setDisabled(false)
               console.log('pay success', res)
               console.log(data.oid)
               Taro.navigateTo({ url: '/pages/order/complete?oid=' + data.oid})
             },
             fail (err) {
+              setDisabled(false)
               console.error('pay fail', err)
             },
             complete (res) {
-              setDisabled(true)
+              setDisabled(false)
               console.error('pay complete', res)
             }
           })
@@ -418,7 +451,7 @@ function Index() {
             <View>{ isFav && '已收藏' || '收藏'}</View>
           </View>
           <View className="">
-            <InputNumber defaultValue={1} onChange={(v) => setQ(v) } allowEmpty />
+            <NumInput v={quantity} />
           </View>
         </View>
         <View className="right">
