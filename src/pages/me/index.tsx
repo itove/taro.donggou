@@ -138,27 +138,41 @@ function Index() {
         <View className="info-2">
           <View className="item" onClick={() => listOrder(1)}>
             <img
-              src={Env.iconUrl + 'order-0.svg'}
+              src={Env.iconUrl + 'order-1.png'}
             />
             <View> 待付款 </View>
           </View>
           <View className="item" onClick={() => listOrder(2)} >
             <img
-              src={Env.iconUrl + 'order-1.svg'}
+              src={Env.iconUrl + 'order-2.png'}
             />
             <View> 已付款 </View>
           </View>
           <View className="item" onClick={() => listOrder(3)} >
             <img
-              src={Env.iconUrl + 'order-2.svg'}
+              src={Env.iconUrl + 'order-3.png'}
             />
             <View> 已完成 </View>
           </View>
           <View className="item" onClick={() => listOrder(4)} >
             <img
-              src={Env.iconUrl + 'order-4.svg'}
+              src={Env.iconUrl + 'order-5.png'}
             />
             <View> 退款 </View>
+          </View>
+        </View>
+      </View>
+
+      <View className="block">
+        <View className="header">
+          服务
+        </View>
+        <View className="info-2">
+          <View className="item" onClick={() => Taro.navigateTo({ url: '/pages/feedback/index'})}>
+            <img
+              src={Env.iconUrl + 'grid_6.png'}
+            />
+            <View> 投诉建议 </View>
           </View>
         </View>
       </View>
