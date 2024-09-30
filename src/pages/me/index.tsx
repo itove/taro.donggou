@@ -93,6 +93,7 @@ function Index() {
         </View> 
       </View>
 
+      { false &&
       <View className="block">
         <View className="header">
           我的收藏
@@ -124,6 +125,7 @@ function Index() {
           </View>
         </View>
       </View>
+      }
 
       <View className="block">
         <View className="header">
