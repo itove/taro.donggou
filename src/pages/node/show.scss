@@ -259,4 +259,7 @@ page{
     justify-content: center;
     align-items: center;
   }
+  Button[disabled]{
+    color: #0000006b;
+  }
 }

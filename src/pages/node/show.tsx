@@ -52,9 +52,14 @@ function Index() {
   }
 
   const NumInput = ({v}) => {
+    let disabled = false
+    if (v <= 1) {
+      disabled = true
+      v = 1
+    }
     return (
       <View className="num-input">
-        <Button className="minus" onClick={minus}>-</Button>
+        <Button className="minus" onClick={minus} disabled={disabled}>-</Button>
         <Input className="input" onInput={(v) => onInput(v)} value={v} type='number' />
         <Button className="plus" onClick={add}>+</Button>
       </View>
