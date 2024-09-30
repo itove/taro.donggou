@@ -77,7 +77,7 @@ function Index() {
 
   return (
     <View className="">
-      <View className="p-1 align-items-center d-flex">
+      <View className="p-1 align-items-center d-flex user">
         <View onClick={() => Taro.navigateTo({url: 'info'})}>
           <Avatar
             size="50"
@@ -91,6 +91,9 @@ function Index() {
             <View onClick={() => Taro.navigateTo({url: 'login'})}>请点击登录</View>
             }
         </View> 
+        { logged &&
+        <img onClick={() => Taro.navigateTo({url: 'info'})} className="ms-1 icon" src={Env.iconUrl + 'arrow-right.png'} />
+        }
       </View>
 
       { false &&
