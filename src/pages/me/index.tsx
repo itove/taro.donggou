@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Avatar } from "@nutui/nutui-react-taro"
+import { Avatar, Badge } from "@nutui/nutui-react-taro"
 import './index.scss'
 import Taro from '@tarojs/taro'
+import { useDidShow } from '@tarojs/taro'
 import { Env } from '../../env'
 
 function Index() {
   const [logged, setLogged] = useState(false)
   const [user, setUser] = useState({roles:[]})
   const [uid, setUid] = useState(0)
+  const [countPending, setCountPending] = useState(0)
+  const [countPaid, setCountPaid] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState('')
 
+  useDidShow(() => {
+    console.log('show me index')
+    if (uid !== 0) {
+      countOrders(uid)
+    }
+  })
+
   useEffect(() => {
+    console.log('in me index')
     Taro.getStorage({
       key: Env.storageKey
     })
@@ -26,6 +37,7 @@ function Index() {
         let u = res.data
         setUser(u)
         setUid(u.id)
+        countOrders(u.id)
         if (u.avatar !== undefined) {
           setAvatarUrl(Env.baseUrl + u.avatar)
         }
@@ -36,6 +48,18 @@ function Index() {
       // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
+
+  const countOrders = (uid) => {
+    console.log('counting orders of user ' + uid)
+    Taro.request({
+      url: Env.apiUrl + 'orders/count?uid=' + uid
+    })
+    .then(res => {
+      console.log(res)
+      setCountPending(res.data[1])
+      setCountPaid(res.data[2])
+    })
+  }
 
   const goto = (region) => {
     if (logged) {
@@ -142,15 +166,19 @@ function Index() {
         </View>
         <View className="info-2">
           <View className="item" onClick={() => listOrder(1)}>
+            <Badge value={countPending}>
             <img
               src={Env.iconUrl + 'order-1.png'}
             />
+            </Badge>
             <View> 待付款 </View>
           </View>
           <View className="item" onClick={() => listOrder(2)} >
+            <Badge value={countPaid}>
             <img
               src={Env.iconUrl + 'order-2.png'}
             />
+            </Badge>
             <View> 已付款 </View>
           </View>
           <View className="item" onClick={() => listOrder(3)} >
