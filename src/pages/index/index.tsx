@@ -90,9 +90,9 @@ function Index() {
   const [chiList, setChiList] = useState([])
   const [gouList, setGouList] = useState([])
   const [dili, setDili] = useState({})
-  const [jianjie, setJianjie] = useState({})
-  const [hongsetext, setHongsetext] = useState({})
-  const [historytext, setHistorytext] = useState({})
+  const [jianjie, setJianjie] = useState({image: ''})
+  const [hongsetext, setHongsetext] = useState({image: ''})
+  const [historytext, setHistorytext] = useState({image: ''})
   const [tab1value, setTab1value] = useState<string | number>('0')
 
   const onShareAppMessage = (res) => {}
