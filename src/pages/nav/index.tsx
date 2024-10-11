@@ -336,6 +336,9 @@ function Index() {
         max-scale={17}
         min-scale={11}
         onTap={onTap}
+        // https://github.com/NervJS/taro/issues/16667
+        // https://github.com/NervJS/taro/issues/16595
+        setting={{}}
       >
         <CoverView className="call-out" slot="callout">
           <CoverView marker-id="2"> this is customCallout </CoverView>
