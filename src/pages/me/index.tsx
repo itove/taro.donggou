@@ -38,7 +38,7 @@ function Index() {
         setUser(u)
         setUid(u.id)
         countOrders(u.id)
-        if (u.avatar !== undefined) {
+        if (u.avatar !== undefined && u.avatar !== null) {
           setAvatarUrl(Env.baseUrl + u.avatar)
         }
       })

@@ -37,7 +37,7 @@ function Index() {
           user.name = '填写姓名'
         }
         setUser(user)
-        if (user.avatar !== undefined) {
+        if (user.avatar !== undefined && user.avatar !== null) {
           setAvatarUrl(Env.baseUrl + user.avatar)
         }
       })
